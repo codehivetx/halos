@@ -3,7 +3,7 @@
 DATA=/data
 
 echo "starting chat server"
-node /usr/local/sbin/server.js >> /data/server.log >&1 &
+nohup node /usr/local/sbin/server.js >> /data/server.log >&1 &
 
 
 if [ -f ${DATA}/.setup ];
