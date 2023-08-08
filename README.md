@@ -38,6 +38,15 @@ $ salt
 > /quit
 ```
 
+- Give a login prompt
+
+```shell
+docker-compose exec halos login
+000000000 login: username
+password: …
+…
+```
+
 ## LICENSE
 
 © 2023 [Code Hive Tx, LLC](https://codehivetx.us)
