@@ -2,6 +2,10 @@
 
 DATA=/data
 
+echo "starting chat server"
+node /usr/local/sbin/server.js >> /data/server.log >&1 &
+
+
 if [ -f ${DATA}/.setup ];
 then
     echo >&2 "ERR already setup - delete ${DATA}/.setup if wrong!"
@@ -33,7 +37,7 @@ mv /etc/exim ${DATA}/exim
 ln -s ${DATA}/exim /etc/exim
 ( cd /etc/exim && patch < /usr/local/share/patch/exim.conf.patch )
 
-mkdir -p ${DATA}/mail
+mkdir -p ${DATA}/mail ${DATA}/u
 rmdir /var/mail
 ln -s ${DATA}/mail /var/mail
 chgrp mail ${DATA}/mail
@@ -46,5 +50,3 @@ rc-update add exim
 
 echo "Now add users with add.sh"
 
-echo "starting chat server"
-node /usr/local/sbin/server.js >> /data/server.log >&1 &
