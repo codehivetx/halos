@@ -28,5 +28,23 @@ echo "OLDHOST: ${OLDHOST} ${OLDIP}"
 echo "${OLDIP}  ${HST}" >> /etc/hosts
 
 ## SETUP
+# TODO: fix mail
+mv /etc/exim ${DATA}/exim
+ln -s ${DATA}/exim /etc/exim
+( cd /etc/exim && patch < /usr/local/share/patch/exim.conf.patch )
+
+mkdir -p ${DATA}/mail
+rmdir /var/mail
+ln -s ${DATA}/mail /var/mail
+chgrp mail ${DATA}/mail
+chmod 2775 /var/mail
 
 touch ${DATA}/.setup
+
+service exim start
+rc-update add exim
+
+echo "Now add users with add.sh"
+
+echo "starting chat server"
+node /usr/local/sbin/server.js >> /data/server.log >&1 &

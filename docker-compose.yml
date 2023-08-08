@@ -1,0 +1,10 @@
+version: '3'
+services:
+  halos:
+    build: img
+    volumes:
+      - halos-data:/data
+
+volumes:
+  halos-data:
+
